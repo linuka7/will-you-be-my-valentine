@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mash ♥️ Be My Valentine</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
   body {
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Roboto', sans-serif;
     overflow: hidden;
     background: linear-gradient(120deg, #ff9a9e, #fad0c4, #ffd1dc);
     height: 100vh;
@@ -20,19 +21,29 @@
   }
 
   h1 {
-    font-size: 3rem;
-    margin: 0 0 10px;
-    text-shadow: 0 0 15px rgba(255,255,255,0.9);
+    font-family: 'Pacifico', cursive;
+    font-size: 3.5rem;
+    margin: 0 0 20px;
+    text-shadow: 0 0 20px rgba(255,255,255,0.9);
   }
 
   h2 {
+    font-family: 'Roboto', sans-serif;
     font-size: 1.8rem;
-    margin: 10px 0 5px;
+    margin: 0;
+    text-shadow: 0 0 12px rgba(255,255,255,0.7);
   }
 
-  p {
-    font-size: 1.4rem;
-    margin-top: 5px;
+  .card {
+    position: relative;
+    z-index: 2;
+    width: 90%;
+    max-width: 400px;
+    background: rgba(255,255,255,0.2);
+    padding: 35px;
+    border-radius: 30px;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.25);
   }
 
   button {
@@ -59,18 +70,12 @@
     position: relative;
   }
 
-  .heart, .sparkle, .rose {
+  .heart, .sparkle {
     position: absolute;
     pointer-events: none;
     animation: float linear infinite;
-    opacity: 0.8;
-    text-shadow: 0 0 8px rgba(255,255,255,0.8);
-  }
-
-  /* Falling rose petals animation */
-  @keyframes fall {
-    0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(110vh) rotate(360deg); opacity: 0.8; }
+    opacity: 0.9;
+    text-shadow: 0 0 10px rgba(255,255,255,0.8);
   }
 
   @keyframes float {
@@ -82,15 +87,16 @@
 </head>
 <body>
 
-<div id="card" style="z-index:2;">
+<div class="card" id="card">
   <h1>Mash ♥️</h1>
   <h2>Will you be my Valentine? 💌</h2>
+
   <button id="yes" onclick="yesClick()">Yes 💖</button>
   <button id="no" onmouseover="moveButton()">No 🙈</button>
 </div>
 
 <script>
-// Words for the No button
+// No button words
 const noWords = ["No 🙈", "Maybe 😅", "Not yet 😬", "Try again 😜"];
 
 function moveButton() {
@@ -101,7 +107,7 @@ function moveButton() {
   btn.innerText = noWords[Math.floor(Math.random() * noWords.length)];
 }
 
-// Dense hearts + sparkles before pressing Yes
+// Pre-Yes floating hearts
 setInterval(() => {
   const elem = document.createElement("div");
   const isHeart = Math.random() > 0.25;
@@ -115,34 +121,23 @@ setInterval(() => {
   setTimeout(() => elem.remove(), 12000);
 }, 80);
 
-// After pressing Yes
+// Yes button click
 function yesClick() {
   document.body.innerHTML = `
-    <h1>She said Yes! 💖</h1>
-    <h2>Linuka</h2>
-    <p>Linuka is now the happiest man alive 🥰</p>
+    <h1>She said Yes ! 💖</h1>
+    <h2>Linuka is now the happiest man alive 🥰</h2>
   `;
 
-  // Colorful hearts + sparkles + rose petals
+  // Floating colorful hearts & sparkles on Yes page
   setInterval(() => {
     const elem = document.createElement("div");
-    const r = Math.random();
-    if (r < 0.4) elem.className = "heart";
-    else if (r < 0.7) elem.className = "sparkle";
-    else elem.className = "rose";
-
+    const isHeart = Math.random() > 0.3;
+    elem.className = isHeart ? "heart" : "sparkle";
     const size = Math.random() * 40 + 20;
     elem.style.fontSize = size + "px";
     elem.style.left = Math.random() * window.innerWidth + "px";
-
-    if(elem.className === "rose") {
-      elem.style.animation = `fall ${Math.random() * 4 + 6}s linear forwards`;
-    } else {
-      elem.style.animationDuration = (Math.random() * 5 + 4) + "s";
-    }
-
-    elem.innerHTML = (elem.className === "heart") ? "💖" :
-                     (elem.className === "sparkle") ? "✨" : "🌹";
+    elem.style.animationDuration = (Math.random() * 5 + 4) + "s";
+    elem.innerHTML = isHeart ? "💖" : "✨";
     document.body.appendChild(elem);
     setTimeout(() => elem.remove(), 12000);
   }, 80);
