@@ -22,16 +22,16 @@
 
   h1 {
     font-family: 'Pacifico', cursive;
-    font-size: 3.5rem;
-    margin: 0 0 20px;
-    text-shadow: 0 0 20px rgba(255,255,255,0.9);
+    font-size: 3rem;
+    margin: 0 0 10px;
+    text-shadow: 0 0 6px rgba(255,255,255,0.6); /* reduced glow */
   }
 
   h2 {
     font-family: 'Roboto', sans-serif;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     margin: 0;
-    text-shadow: 0 0 12px rgba(255,255,255,0.7);
+    text-shadow: 0 0 4px rgba(255,255,255,0.5); /* softer glow */
   }
 
   .card {
@@ -54,12 +54,14 @@
     border-radius: 30px;
     cursor: pointer;
     transition: 0.3s;
+    z-index: 3;
+    position: relative;
   }
 
   #yes {
     background: #ff4d6d;
     color: white;
-    box-shadow: 0 0 18px rgba(255,77,109,0.6);
+    box-shadow: 0 0 12px rgba(255,77,109,0.4);
   }
 
   #yes:hover { transform: scale(1.1); }
@@ -67,7 +69,6 @@
   #no {
     background: white;
     color: #ff4d6d;
-    position: relative;
   }
 
   .heart, .sparkle {
@@ -75,7 +76,7 @@
     pointer-events: none;
     animation: float linear infinite;
     opacity: 0.9;
-    text-shadow: 0 0 10px rgba(255,255,255,0.8);
+    text-shadow: 0 0 6px rgba(255,255,255,0.6); /* softer glow */
   }
 
   @keyframes float {
@@ -121,14 +122,17 @@ setInterval(() => {
   setTimeout(() => elem.remove(), 12000);
 }, 80);
 
-// Yes button click
+// Yes page
 function yesClick() {
+  // create a wrapper to center two lines
   document.body.innerHTML = `
-    <h1>She said Yes ! 💖</h1>
-    <h2>Linuka is now the happiest man alive 🥰</h2>
+    <div style="position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; text-align:center;">
+      <h1>She said Yes ! 💖</h1>
+      <h2>Linuka is now the happiest man alive 🥰</h2>
+    </div>
   `;
 
-  // Floating colorful hearts & sparkles on Yes page
+  // Floating colorful hearts & sparkles
   setInterval(() => {
     const elem = document.createElement("div");
     const isHeart = Math.random() > 0.3;
