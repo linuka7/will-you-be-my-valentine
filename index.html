@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mash ♥️ Be My Valentine</title>
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script&display=swap" rel="stylesheet">
 <style>
   body {
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Dancing Script', cursive;
     overflow: hidden;
     background: linear-gradient(120deg, #ff9a9e, #fad0c4, #ffd1dc);
     height: 100vh;
@@ -24,14 +24,14 @@
     font-family: 'Pacifico', cursive;
     font-size: 3rem;
     margin: 0 0 10px;
-    text-shadow: 0 0 6px rgba(255,255,255,0.6); /* reduced glow */
+    text-shadow: 0 0 6px rgba(255,255,255,0.6);
   }
 
   h2 {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.6rem;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
     margin: 0;
-    text-shadow: 0 0 4px rgba(255,255,255,0.5); /* softer glow */
+    text-shadow: 0 0 4px rgba(255,255,255,0.5);
   }
 
   .card {
@@ -76,7 +76,7 @@
     pointer-events: none;
     animation: float linear infinite;
     opacity: 0.9;
-    text-shadow: 0 0 6px rgba(255,255,255,0.6); /* softer glow */
+    text-shadow: 0 0 6px rgba(255,255,255,0.6);
   }
 
   @keyframes float {
@@ -124,7 +124,6 @@ setInterval(() => {
 
 // Yes page
 function yesClick() {
-  // create a wrapper to center two lines
   document.body.innerHTML = `
     <div style="position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; text-align:center;">
       <h1>She said Yes ! 💖</h1>
@@ -132,7 +131,7 @@ function yesClick() {
     </div>
   `;
 
-  // Floating colorful hearts & sparkles
+  // Floating hearts & sparkles
   setInterval(() => {
     const elem = document.createElement("div");
     const isHeart = Math.random() > 0.3;
