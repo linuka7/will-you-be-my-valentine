@@ -19,27 +19,20 @@
     color: #fff;
   }
 
-  .card {
-    position: relative;
-    z-index: 2;
-    width: 90%;
-    max-width: 400px;
-    background: rgba(255,255,255,0.2);
-    padding: 35px;
-    border-radius: 30px;
-    backdrop-filter: blur(14px);
-    box-shadow: 0 12px 35px rgba(0,0,0,0.25);
-  }
-
   h1 {
     font-size: 3rem;
     margin: 0 0 10px;
-    text-shadow: 0 0 15px rgba(255,255,255,0.8);
+    text-shadow: 0 0 15px rgba(255,255,255,0.9);
   }
 
   h2 {
     font-size: 1.8rem;
-    margin: 10px 0 15px;
+    margin: 10px 0 5px;
+  }
+
+  p {
+    font-size: 1.4rem;
+    margin-top: 5px;
   }
 
   button {
@@ -66,12 +59,18 @@
     position: relative;
   }
 
-  .heart, .sparkle {
+  .heart, .sparkle, .rose {
     position: absolute;
     pointer-events: none;
     animation: float linear infinite;
     opacity: 0.8;
     text-shadow: 0 0 8px rgba(255,255,255,0.8);
+  }
+
+  /* Falling rose petals animation */
+  @keyframes fall {
+    0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0.8; }
   }
 
   @keyframes float {
@@ -83,43 +82,26 @@
 </head>
 <body>
 
-<!-- Offline Background Music -->
-<audio autoplay loop>
-  <source src="romantic.mp3" type="audio/mpeg">
-</audio>
-
-<div class="card">
+<div id="card" style="z-index:2;">
   <h1>Mash ♥️</h1>
   <h2>Will you be my Valentine? 💌</h2>
-
   <button id="yes" onclick="yesClick()">Yes 💖</button>
   <button id="no" onmouseover="moveButton()">No 🙈</button>
 </div>
 
 <script>
-function yesClick() {
-  document.body.innerHTML =
-    "<h1 style='font-size:3rem; text-align:center'>Mash ♥️</h1>" +
-    "<p style='font-size:1.5rem; text-align:center'>You just made me the happiest person 🥰</p>";
-}
-
 // Words for the No button
 const noWords = ["No 🙈", "Maybe 😅", "Not yet 😬", "Try again 😜"];
 
 function moveButton() {
   const btn = document.getElementById("no");
-  
-  // Move button randomly
   btn.style.position = "absolute";
   btn.style.top = Math.random() * (window.innerHeight - 60) + "px";
   btn.style.left = Math.random() * (window.innerWidth - 120) + "px";
-  
-  // Change the text randomly
-  const word = noWords[Math.floor(Math.random() * noWords.length)];
-  btn.innerText = word;
+  btn.innerText = noWords[Math.floor(Math.random() * noWords.length)];
 }
 
-// Dense floating hearts + sparkles
+// Dense hearts + sparkles before pressing Yes
 setInterval(() => {
   const elem = document.createElement("div");
   const isHeart = Math.random() > 0.25;
@@ -132,6 +114,39 @@ setInterval(() => {
   document.body.appendChild(elem);
   setTimeout(() => elem.remove(), 12000);
 }, 80);
+
+// After pressing Yes
+function yesClick() {
+  document.body.innerHTML = `
+    <h1>She said Yes! 💖</h1>
+    <h2>Linuka</h2>
+    <p>Linuka is now the happiest man alive 🥰</p>
+  `;
+
+  // Colorful hearts + sparkles + rose petals
+  setInterval(() => {
+    const elem = document.createElement("div");
+    const r = Math.random();
+    if (r < 0.4) elem.className = "heart";
+    else if (r < 0.7) elem.className = "sparkle";
+    else elem.className = "rose";
+
+    const size = Math.random() * 40 + 20;
+    elem.style.fontSize = size + "px";
+    elem.style.left = Math.random() * window.innerWidth + "px";
+
+    if(elem.className === "rose") {
+      elem.style.animation = `fall ${Math.random() * 4 + 6}s linear forwards`;
+    } else {
+      elem.style.animationDuration = (Math.random() * 5 + 4) + "s";
+    }
+
+    elem.innerHTML = (elem.className === "heart") ? "💖" :
+                     (elem.className === "sparkle") ? "✨" : "🌹";
+    document.body.appendChild(elem);
+    setTimeout(() => elem.remove(), 12000);
+  }, 80);
+}
 </script>
 
 </body>
