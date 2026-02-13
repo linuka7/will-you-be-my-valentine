@@ -103,14 +103,23 @@ function yesClick() {
     "<p style='font-size:1.5rem; text-align:center'>You just made me the happiest person 🥰</p>";
 }
 
+// Words for the No button
+const noWords = ["No 🙈", "Maybe 😅", "Not yet 😬", "Try again 😜"];
+
 function moveButton() {
   const btn = document.getElementById("no");
+  
+  // Move button randomly
   btn.style.position = "absolute";
   btn.style.top = Math.random() * (window.innerHeight - 60) + "px";
-  btn.style.left = Math.random() * (window.innerWidth - 100) + "px";
+  btn.style.left = Math.random() * (window.innerWidth - 120) + "px";
+  
+  // Change the text randomly
+  const word = noWords[Math.floor(Math.random() * noWords.length)];
+  btn.innerText = word;
 }
 
-// Dense hearts + sparkles
+// Dense floating hearts + sparkles
 setInterval(() => {
   const elem = document.createElement("div");
   const isHeart = Math.random() > 0.25;
